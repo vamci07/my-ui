@@ -1,4 +1,4 @@
-import ThemeWrapper from './ThemeWrapper'
-import myTheme from './myTheme'
+import ThemeWrapper from './ThemeWrapper';
+import myTheme from './myTheme';
 
-export { ThemeWrapper, myTheme }
+export { ThemeWrapper, myTheme };

@@ -1,10 +1,10 @@
-import React from 'react'
-import clsx from 'clsx'
-import { AppBar, Toolbar, Typography, makeStyles, IconButton } from '@material-ui/core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import clsx from 'clsx';
+import { AppBar, Toolbar, Typography, makeStyles, IconButton } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const drawerWidth = 240
+const drawerWidth = 240;
 
 const headerStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,10 +22,10 @@ const headerStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-}))
+}));
 
 function Header({ open, handleDrawerOpen }) {
-  const classes = headerStyles()
+  const classes = headerStyles();
   return (
     <AppBar
       position="fixed"
@@ -50,7 +50,7 @@ function Header({ open, handleDrawerOpen }) {
         </Typography>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
-export default Header
+export default Header;

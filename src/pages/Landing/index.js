@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Typography } from '@material-ui/core'
+import React from 'react';
+import { Box, Typography } from '@material-ui/core';
 
 function Landing() {
   return (
@@ -25,7 +25,7 @@ function Landing() {
         sagittis orci a.
       </Typography>
     </Box>
-  )
+  );
 }
 
-export default Landing
+export default Landing;

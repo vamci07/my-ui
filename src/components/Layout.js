@@ -1,38 +1,43 @@
-import React from 'react'
-import { Box, makeStyles } from '@material-ui/core'
-import Header from './Header'
-import SideNav from './SideNav'
-import Content from './Content'
-import Landing from '../pages/Landing'
+import React from 'react';
+import { Box, makeStyles } from '@material-ui/core';
+import Header from './Header';
+import SideNav from './SideNav';
+import Content from './Content';
 
 const layoutStyles = makeStyles({
   root: {
+    width: '100%',
     display: 'flex',
   },
-})
+  sideNavSection: {
+    width: 72,
+  },
+  mainSection: {
+    width: 'calc(100vw - 72px)',
+    display: 'flex',
+  },
+});
 
-function Layout() {
-  const [open, setOpen] = React.useState(false)
+function Layout({ lng, changeLanguage, children }) {
+  const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
+  const handleSideNav = () => {
+    setOpen(!open);
+  };
 
-  const handleDrawerClose = () => {
-    setOpen(false)
-  }
-
-  const classes = layoutStyles()
+  const classes = layoutStyles();
 
   return (
     <Box className={classes.root}>
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      <SideNav open={open} handleDrawerClose={handleDrawerClose} />
-      <Content>
-        <Landing />
-      </Content>
+      <Box className={classes.sideNavSection}>
+        <SideNav open={open} handleSideNav={handleSideNav} />
+      </Box>
+      <Box className={classes.mainSection}>
+        <Header open={open} lng={lng} changeLanguage={changeLanguage} />
+        <Content children={children} />
+      </Box>
     </Box>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

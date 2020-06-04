@@ -1,5 +1,5 @@
-import { createMuiTheme, responsiveFontSizes } from '@material-ui/core'
-import { blue, pink } from '@material-ui/core/colors'
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core';
+import { blue, pink } from '@material-ui/core/colors';
 
 function myTheme(themeName = 'light') {
   let theme = createMuiTheme({
@@ -33,10 +33,10 @@ function myTheme(themeName = 'light') {
         dark: pink[500],
       },
     },
-  })
+  });
 
-  theme = responsiveFontSizes(theme)
-  return theme
+  theme = responsiveFontSizes(theme);
+  return theme;
 }
 
-export default myTheme
+export default myTheme;

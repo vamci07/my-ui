@@ -52,28 +52,28 @@ function SideNav({ open, handleSideNav }) {
         <List component="nav" className={classes.list}>
           <NavItem
             label="Home"
-            to="/my-ui/home"
+            to="/"
             icon={faHome}
             alt="home"
-            active={pathname === '/my-ui/home'}
+            active={pathname === '/'}
             background={blue}
             handleSideNav={handleSideNav}
           />
           <NavItem
             label="About"
-            to="/my-ui/about"
+            to="/about"
             icon={faBuilding}
             alt="about"
-            active={pathname === '/my-ui/about'}
+            active={pathname === '/about'}
             background={red}
             handleSideNav={handleSideNav}
           />
           <NavItem
             label="Contact"
-            to="/my-ui/contact"
+            to="/contact"
             icon={faEdit}
             alt="contact"
-            active={pathname === '/my-ui/contact'}
+            active={pathname === '/contact'}
             background={green}
             open={open}
             hasSubMenu={true}
@@ -85,19 +85,19 @@ function SideNav({ open, handleSideNav }) {
             <List component="nav">
               <NavItem
                 label="email"
-                to="/my-ui/contact/email"
+                to="/contact/email"
                 icon={faPaperPlane}
                 alt="email"
-                active={pathname === '/my-ui/contact/email'}
+                active={pathname === '/contact/email'}
                 background={green}
                 handleSideNav={handleSideNav}
               />
               <NavItem
                 label="Call"
-                to="/my-ui/contact/call"
+                to="/contact/call"
                 icon={faPhoneAlt}
                 alt="call"
-                active={pathname === '/my-ui/contact/call'}
+                active={pathname === '/contact/call'}
                 background={green}
                 handleSideNav={handleSideNav}
               />
@@ -105,10 +105,10 @@ function SideNav({ open, handleSideNav }) {
           </Collapse>
           <NavItem
             label="Settings"
-            to="/my-ui/settings"
+            to="/settings"
             icon={faCog}
             alt="settings"
-            active={pathname === '/my-ui/settings'}
+            active={pathname === '/settings'}
             background={purple}
             handleSideNav={handleSideNav}
           />

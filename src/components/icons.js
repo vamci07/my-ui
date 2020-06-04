@@ -14,6 +14,10 @@ import phoneOutlinedSvg from 'static/icons/phone-outlined.svg';
 import emailOutlinedSvg from 'static/icons/send-outlined.svg';
 import settingsOutlinedSvg from 'static/icons/settings-outlined.svg';
 
+import ukFlag from 'static/icons/uk.svg';
+import grFlag from 'static/icons/ger.svg';
+import frFlag from 'static/icons/fra.svg';
+
 export {
   workSvg,
   homeSvg,
@@ -28,4 +32,7 @@ export {
   emailOutlinedSvg,
   settingsSvg,
   settingsOutlinedSvg,
+  ukFlag,
+  grFlag,
+  frFlag,
 };

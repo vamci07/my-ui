@@ -1,27 +1,24 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useLocation } from 'react-router-dom';
-import { Drawer, Box, List, Toolbar, Typography, Collapse } from '@material-ui/core';
+import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton } from '@material-ui/core';
 import { blue, red, green, purple } from '@material-ui/core/colors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  workSvg,
-  homeSvg,
-  homeOutlinedSvg,
-  infoSvg,
-  infoOutlinedSvg,
-  userSvg,
-  userOutlinedSvg,
-  phoneSvg,
-  phoneOutlinedSvg,
-  emailSvg,
-  emailOutlinedSvg,
-  settingsSvg,
-  settingsOutlinedSvg,
-} from './icons';
+  faHome,
+  faBuilding,
+  faEdit,
+  faPaperPlane,
+  faPhoneAlt,
+  faCog,
+  faChevronRight,
+  faChevronLeft,
+} from '@fortawesome/free-solid-svg-icons';
+import logo from 'static/icons/logo.svg';
 import NavItem from '../NavItem';
 import sideNavStyles from './style';
 
-function SideNav({ open, handleDrawerOpen, handleDrawerClose }) {
+function SideNav({ open, handleSideNav }) {
   const { pathname } = useLocation();
   const [openSub, setOpen] = React.useState(false);
 
@@ -29,7 +26,7 @@ function SideNav({ open, handleDrawerOpen, handleDrawerClose }) {
     setOpen(!openSub);
   };
 
-  const classes = sideNavStyles();
+  const classes = sideNavStyles({ open });
   return (
     <Drawer
       variant="permanent"
@@ -44,12 +41,10 @@ function SideNav({ open, handleDrawerOpen, handleDrawerClose }) {
           [classes.drawerClose]: !open,
         }),
       }}
-      onMouseEnter={handleDrawerOpen}
-      onMouseLeave={handleDrawerClose}
     >
       <Toolbar className={classes.drawerToolbar}>
         <Box display="flex" alignItems="center">
-          <img src={workSvg} style={{ height: 40, width: 40 }} alt="app-logo" />
+          <img src={logo} style={{ height: 40, width: 40 }} alt="app-logo" />
           <Typography className={classes.appTitle}>Custom MUI</Typography>
         </Box>
       </Toolbar>
@@ -58,60 +53,72 @@ function SideNav({ open, handleDrawerOpen, handleDrawerClose }) {
           <NavItem
             label="Home"
             to="/"
-            icon={pathname === '/' ? homeSvg : homeOutlinedSvg}
+            icon={faHome}
             alt="home"
             active={pathname === '/'}
             background={blue}
+            handleSideNav={handleSideNav}
           />
           <NavItem
             label="About"
             to="/about"
-            icon={pathname === '/about' ? infoSvg : infoOutlinedSvg}
+            icon={faBuilding}
             alt="about"
             active={pathname === '/about'}
             background={red}
+            handleSideNav={handleSideNav}
           />
           <NavItem
             label="Contact"
             to="/contact"
-            icon={pathname === '/contact' ? userSvg : userOutlinedSvg}
+            icon={faEdit}
             alt="contact"
             active={pathname === '/contact'}
             background={green}
+            open={open}
             hasSubMenu={true}
             expanded={openSub}
             onClick={handleClick}
+            handleSideNav={handleSideNav}
           />
           <Collapse in={openSub} timeout="auto" unmountOnExit>
             <List component="nav">
               <NavItem
                 label="email"
                 to="/contact/email"
-                icon={pathname === '/contact/email' ? emailSvg : emailOutlinedSvg}
+                icon={faPaperPlane}
                 alt="email"
                 active={pathname === '/contact/email'}
                 background={green}
+                handleSideNav={handleSideNav}
               />
               <NavItem
                 label="Call"
                 to="/contact/call"
-                icon={pathname === '/contact/call' ? phoneSvg : phoneOutlinedSvg}
+                icon={faPhoneAlt}
                 alt="call"
                 active={pathname === '/contact/call'}
                 background={green}
+                handleSideNav={handleSideNav}
               />
             </List>
           </Collapse>
           <NavItem
             label="Settings"
             to="/settings"
-            icon={pathname === '/settings' ? settingsSvg : settingsOutlinedSvg}
+            icon={faCog}
             alt="settings"
             active={pathname === '/settings'}
             background={purple}
+            handleSideNav={handleSideNav}
           />
         </List>
       </Box>
+      <div className={classes.action}>
+        <IconButton color="primary" aria-label="open side nav" onClick={handleSideNav}>
+          <FontAwesomeIcon icon={open ? faChevronLeft : faChevronRight} className={classes.expandIcon} />
+        </IconButton>
+      </div>
     </Drawer>
   );
 }

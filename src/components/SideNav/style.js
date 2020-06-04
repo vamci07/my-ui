@@ -9,7 +9,8 @@ const sideNavStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
   },
   drawerOpen: {
     width: drawerWidth,
@@ -18,7 +19,6 @@ const sideNavStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     borderRight: 'none',
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
@@ -31,10 +31,9 @@ const sideNavStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
     borderRight: 'none',
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
   },
   drawerToolbar: {
-    height: 144,
+    height: 72,
     alignItems: 'flex-start',
     padding: theme.spacing(2),
   },
@@ -44,8 +43,22 @@ const sideNavStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
   },
   list: {
-    paddingRight: theme.spacing(0.5),
-    paddingTop: 0,
+    paddingTop: theme.spacing(3),
+  },
+  action: (props) => ({
+    position: 'fixed',
+    bottom: 0,
+    width: props.open ? 240 : 72,
+    height: 64,
+    display: 'flex',
+    alignItems: 'center',
+    paddingRight: props.open && theme.spacing(2),
+    justifyContent: props.open ? 'flex-end' : 'center',
+    transition: 'width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
+  }),
+  expandIcon: {
+    height: 24,
+    width: '24px !important',
   },
 }));
 

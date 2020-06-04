@@ -8,17 +8,19 @@ const GlobalStyle = createGlobalStyle`
     html, body {
       margin: 0;
       padding: 0;
+      width: 100vw;
+      height: 100vh;
     }
 `;
 
 function ThemeWrapper({ children, theme }) {
   return (
     <>
-      <CssBaseline />
       <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
           <MuiThemeProvider theme={theme}>
             <GlobalStyle />
+            <CssBaseline />
             {children}
           </MuiThemeProvider>
         </StylesProvider>

@@ -1,9 +1,20 @@
 import React from 'react';
 import { Box, Typography } from '@material-ui/core';
+import { useTranslation, Trans } from 'react-i18next';
 
 function Landing() {
+  const { t } = useTranslation();
   return (
     <Box>
+      <Typography paragraph>{t('title')}</Typography>
+      <Typography paragraph component="div">
+        <div>
+          <Trans i18nKey="description.part1">
+            To get started, edit <code>src/App.js</code> and save to reload.
+          </Trans>
+        </div>
+        <div>{t('description.part2')}</div>
+      </Typography>
       <Typography paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus

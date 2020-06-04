@@ -3,7 +3,6 @@ import { Box, makeStyles } from '@material-ui/core';
 import Header from './Header';
 import SideNav from './SideNav';
 import Content from './Content';
-import Landing from '../pages/Landing';
 
 const layoutStyles = makeStyles({
   root: {
@@ -19,15 +18,11 @@ const layoutStyles = makeStyles({
   },
 });
 
-function Layout() {
+function Layout({ lng, changeLanguage, children }) {
   const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleSideNav = () => {
+    setOpen(!open);
   };
 
   const classes = layoutStyles();
@@ -35,13 +30,11 @@ function Layout() {
   return (
     <Box className={classes.root}>
       <Box className={classes.sideNavSection}>
-        <SideNav open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
+        <SideNav open={open} handleSideNav={handleSideNav} />
       </Box>
       <Box className={classes.mainSection}>
-        <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-        <Content>
-          <Landing />
-        </Content>
+        <Header open={open} lng={lng} changeLanguage={changeLanguage} />
+        <Content children={children} />
       </Box>
     </Box>
   );

@@ -7,6 +7,14 @@ import Landing from '../pages/Landing';
 
 const layoutStyles = makeStyles({
   root: {
+    width: '100%',
+    display: 'flex',
+  },
+  sideNavSection: {
+    width: 72,
+  },
+  mainSection: {
+    width: 'calc(100vw - 72px)',
     display: 'flex',
   },
 });
@@ -26,11 +34,15 @@ function Layout() {
 
   return (
     <Box className={classes.root}>
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      <SideNav open={open} handleDrawerClose={handleDrawerClose} />
-      <Content>
-        <Landing />
-      </Content>
+      <Box className={classes.sideNavSection}>
+        <SideNav open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
+      </Box>
+      <Box className={classes.mainSection}>
+        <Header open={open} handleDrawerOpen={handleDrawerOpen} />
+        <Content>
+          <Landing />
+        </Content>
+      </Box>
     </Box>
   );
 }

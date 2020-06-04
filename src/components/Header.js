@@ -1,50 +1,24 @@
 import React from 'react';
-import clsx from 'clsx';
-import { AppBar, Toolbar, Typography, makeStyles, IconButton } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-
-const drawerWidth = 240;
+import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
 
 const headerStyles = makeStyles((theme) => ({
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    height: 72,
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.primary.main,
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+    paddingLeft: 72,
   },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  toolbar: {
+    height: 72,
   },
 }));
 
-function Header({ open, handleDrawerOpen }) {
+function Header() {
   const classes = headerStyles();
   return (
-    <AppBar
-      position="fixed"
-      className={clsx(classes.appBar, {
-        [classes.appBarShift]: open,
-      })}
-    >
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          edge="start"
-          className={clsx(classes.menuButton, {
-            [classes.hide]: open,
-          })}
-        >
-          <FontAwesomeIcon icon={faBars} />
-        </IconButton>
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
         <Typography variant="h6" noWrap>
           My App Header
         </Typography>

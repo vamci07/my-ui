@@ -5,17 +5,18 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "latest",
     "@fortawesome/free-solid-svg-icons": "latest",
-    "@fortawesome/react-fontawesome": "latest",
-    "@material-ui/core": "latest",
+    "@fortawesome/react-fontawesome": "^0.1.10",
+    "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "latest",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/user-event": "latest",
-    "clsx": "latest",
+    "@material-ui/lab": "^4.0.0-alpha.55",
+    "@testing-library/jest-dom": "^5.9.0",
+    "@testing-library/react": "^10.2.0",
+    "@testing-library/user-event": "^11.0.1",
+    "clsx": "^1.1.1",
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "latest",
     "styled-components": "latest"
   },
@@ -31,18 +32,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "eslint": "latest",

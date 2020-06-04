@@ -1,15 +1,16 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import About from 'pages/About';
 import Contact from 'pages/Contact';
 import Landing from 'pages/Landing';
 import Settings from 'pages/Settings';
 
 const routes = {
-  landing: '/',
-  about: '/about',
-  contact: '/contact',
-  settings: '/settings',
+  root: '/',
+  landing: '/my-ui/home',
+  about: '/my-ui/about',
+  contact: '/my-ui/contact',
+  settings: '/my-ui/settings',
 };
 
 export default (
@@ -25,6 +26,9 @@ export default (
     </Route>
     <Route path={routes.landing}>
       <Landing />
+    </Route>
+    <Route path={routes.root}>
+      <Redirect to={routes.landing} />
     </Route>
   </Switch>
 );

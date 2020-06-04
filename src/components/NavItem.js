@@ -71,7 +71,7 @@ export default function NavItem({
 NavItem.propTypes = {
   label: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
   alt: PropTypes.string.isRequired,
   active: PropTypes.bool,
   background: PropTypes.object,

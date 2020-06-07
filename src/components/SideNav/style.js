@@ -55,7 +55,7 @@ const sideNavStyles = makeStyles((theme) => ({
     },
   },
   drawerContainer: {
-    height: 'calc(100vh - 233px)',
+    height: 'calc(100vh - 169px)',
     padding: theme.spacing(2, 0),
     backgroundColor: blueGrey[900],
   },
@@ -65,22 +65,22 @@ const sideNavStyles = makeStyles((theme) => ({
   collapseWrapper: {
     backgroundColor: theme.palette.common.black,
   },
-  action: (props) => ({
-    position: 'fixed',
-    bottom: 0,
-    width: props.open ? 240 : 72,
-    height: 64,
-    display: 'flex',
-    alignItems: 'center',
-    paddingRight: props.open && theme.spacing(2),
-    justifyContent: props.open ? 'flex-end' : 'center',
-    transition: 'width 175ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
-    backgroundColor: blueGrey[900],
-  }),
-  expandIcon: {
-    height: 24,
-    width: '24px !important',
-  },
+  //   action: (props) => ({
+  //     position: 'fixed',
+  //     bottom: 0,
+  //     width: props.open ? 240 : 72,
+  //     height: 64,
+  //     display: 'flex',
+  //     alignItems: 'center',
+  //     paddingRight: props.open && theme.spacing(2),
+  //     justifyContent: props.open ? 'flex-end' : 'center',
+  //     transition: 'width 175ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
+  //     backgroundColor: blueGrey[900],
+  //   }),
+  //   expandIcon: {
+  //     height: 24,
+  //     width: '24px !important',
+  //   },
 }));
 
 export default sideNavStyles;

@@ -1,6 +1,8 @@
+/* eslint-disable no-lone-blocks */
 import React from 'react';
 import clsx from 'clsx';
 import { useLocation, useHistory } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar } from '@material-ui/core';
 import { blue, red, green } from '@material-ui/core/colors';
 import { Home } from '@styled-icons/feather/Home';
@@ -11,8 +13,8 @@ import { Mail } from '@styled-icons/feather/Mail';
 import { PhoneCall } from '@styled-icons/feather/PhoneCall';
 import { User } from '@styled-icons/feather/User';
 import { LogOut } from '@styled-icons/feather/LogOut';
-import { ChevronsLeft } from '@styled-icons/feather/ChevronsLeft';
-import { ChevronsRight } from '@styled-icons/feather/ChevronsRight';
+// import { ChevronsLeft } from '@styled-icons/feather/ChevronsLeft';
+// import { ChevronsRight } from '@styled-icons/feather/ChevronsRight';
 import logo from 'static/icons/logo.svg';
 import userImg from 'static/images/user.jpg';
 import NavItem from '../NavItem';
@@ -134,17 +136,16 @@ function SideNav({ open, user, handleSideNav }) {
           </Collapse>
         </List>
       </Box>
-      <div className={classes.action}>
-        <IconButton color="primary" aria-label="open side nav" onClick={handleSideNav}>
-          {open ? (
-            <ChevronsLeft style={{ height: 20, width: 20 }} />
-          ) : (
-            <ChevronsRight style={{ height: 20, width: 20 }} />
-          )}
-        </IconButton>
-      </div>
     </Drawer>
   );
 }
 
 export default SideNav;
+
+{
+  /* <div className={classes.action}>
+  <IconButton color="primary" aria-label="open side nav" onClick={handleSideNav}>
+    {open ? <ChevronsLeft style={{ height: 20, width: 20 }} /> : <ChevronsRight style={{ height: 20, width: 20 }} />}
+  </IconButton>
+</div>; */
+}

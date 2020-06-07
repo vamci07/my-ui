@@ -2,7 +2,6 @@ import React from 'react';
 import Color from 'color';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -11,34 +10,31 @@ import { Box } from '@material-ui/core';
 
 const useGridStyles = makeStyles((theme) => ({
   root: {
-    // width: 'calc(100vw - 288px)',
-    // overflowX: 'auto',
-    // margin: theme.spacing(0),
+    width: '100%',
+    height: 432,
+    overflowX: 'scroll',
     display: 'flex',
     alignItems: 'center',
     '& > *': {
-      padding: theme.spacing(3),
+      padding: theme.spacing(4),
     },
-    // '& button': {
-    //   paddingLeft: 0,
-    // },
   },
 }));
 
 const useStyles = makeStyles(() => ({
-  actionArea: {
-    borderRadius: 16,
+  cardWrapper: {
     transition: '0.2s',
     '&:hover': {
       transform: 'scale(1.1)',
     },
   },
   card: ({ color }) => ({
+    cursor: 'pointer',
     minWidth: 256,
     borderRadius: 16,
     boxShadow: 'none',
     '&:hover': {
-      boxShadow: `0 6px 12px 0 ${Color(color).rotate(-12).darken(0.2).fade(0.5)}`,
+      boxShadow: `0 10px 15px -3px ${Color(color).rotate(-12).darken(0.2).fade(0.5)}`,
     },
   }),
   content: ({ color }) => {
@@ -66,7 +62,7 @@ const useStyles = makeStyles(() => ({
 const CustomCard = ({ classes, image, title, subtitle }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
   return (
-    <CardActionArea className={classes.actionArea}>
+    <div className={classes.cardWrapper}>
       <Card className={classes.card}>
         <CardMedia classes={mediaStyles} image={image} />
         <CardContent className={classes.content}>
@@ -76,7 +72,7 @@ const CustomCard = ({ classes, image, title, subtitle }) => {
           <Typography className={classes.subtitle}>{subtitle}</Typography>
         </CardContent>
       </Card>
-    </CardActionArea>
+    </div>
   );
 };
 
@@ -87,7 +83,7 @@ const Gamer = () => {
   const styles3 = useStyles({ color: '#ff9900' });
   const styles4 = useStyles({ color: '#34241e' });
   return (
-    <Box classes={gridStyles}>
+    <Box className={gridStyles.root}>
       <CustomCard
         classes={styles}
         title={'Dota 2'}

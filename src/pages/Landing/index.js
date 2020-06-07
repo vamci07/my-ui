@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { useTranslation, Trans } from 'react-i18next';
 import landingStyles from './style';
+import Gamer from './components/Gamer';
 
 function Landing() {
   const { t } = useTranslation();
@@ -17,6 +18,9 @@ function Landing() {
         </div>
         <div>{t('description.part2')}</div>
       </Typography>
+      <Box height={432}>
+        <Gamer />
+      </Box>
       <Typography paragraph align="justify">
         Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim
         diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra

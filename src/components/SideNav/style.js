@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { blueGrey } from '@material-ui/core/colors';
 
 const drawerWidth = 240;
 
@@ -42,8 +43,27 @@ const sideNavStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightBold,
     paddingLeft: theme.spacing(2),
   },
+  userContainer: {
+    padding: theme.spacing(3, 2),
+    display: 'flex',
+    alignItems: 'center',
+  },
+  userActionsContainer: {
+    paddingTop: theme.spacing(1),
+    '& > *': {
+      marginRight: theme.spacing(2),
+    },
+  },
+  drawerContainer: {
+    height: 'calc(100vh - 233px)',
+    padding: theme.spacing(2, 0),
+    backgroundColor: blueGrey[900],
+  },
   list: {
     paddingTop: theme.spacing(3),
+  },
+  collapseWrapper: {
+    backgroundColor: theme.palette.common.black,
   },
   action: (props) => ({
     position: 'fixed',
@@ -54,7 +74,8 @@ const sideNavStyles = makeStyles((theme) => ({
     alignItems: 'center',
     paddingRight: props.open && theme.spacing(2),
     justifyContent: props.open ? 'flex-end' : 'center',
-    transition: 'width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
+    transition: 'width 175ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
+    backgroundColor: blueGrey[900],
   }),
   expandIcon: {
     height: 24,

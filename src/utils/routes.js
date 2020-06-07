@@ -1,29 +1,34 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import About from 'pages/About';
-import Contact from 'pages/Contact';
+import { Email, Phone } from 'pages/Contact';
 import Landing from 'pages/Landing';
 import Settings from 'pages/Settings';
 
-const routes = {
+export const links = {
   landing: '/',
   about: '/about',
   contact: '/contact',
+  email: '/contact/email',
+  phone: '/contact/phone',
   settings: '/settings',
 };
 
-export default (
+export const routes = (
   <Switch>
-    <Route path={routes.about}>
+    <Route path={links.about}>
       <About />
     </Route>
-    <Route path={routes.contact}>
-      <Contact />
+    <Route path={links.email}>
+      <Email />
     </Route>
-    <Route path={routes.settings}>
+    <Route path={links.phone}>
+      <Phone />
+    </Route>
+    <Route path={links.settings}>
       <Settings />
     </Route>
-    <Route path={routes.landing}>
+    <Route path={links.landing}>
       <Landing />
     </Route>
   </Switch>

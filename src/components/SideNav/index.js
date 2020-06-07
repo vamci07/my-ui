@@ -1,25 +1,28 @@
 import React from 'react';
 import clsx from 'clsx';
-import { useLocation } from 'react-router-dom';
-import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton } from '@material-ui/core';
-import { blue, red, green, purple } from '@material-ui/core/colors';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faBuilding,
-  faEdit,
-  faPaperPlane,
-  faPhoneAlt,
-  faCog,
-  faChevronRight,
-  faChevronLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { useLocation, useHistory } from 'react-router-dom';
+import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar } from '@material-ui/core';
+import { blue, red, green } from '@material-ui/core/colors';
+import { Home } from '@styled-icons/feather/Home';
+import { Info } from '@styled-icons/feather/Info';
+import { Smartphone } from '@styled-icons/feather/Smartphone';
+import { Settings } from '@styled-icons/feather/Settings';
+import { Mail } from '@styled-icons/feather/Mail';
+import { PhoneCall } from '@styled-icons/feather/PhoneCall';
+import { User } from '@styled-icons/feather/User';
+import { LogOut } from '@styled-icons/feather/LogOut';
+import { ChevronsLeft } from '@styled-icons/feather/ChevronsLeft';
+import { ChevronsRight } from '@styled-icons/feather/ChevronsRight';
 import logo from 'static/icons/logo.svg';
+import userImg from 'static/images/user.jpg';
 import NavItem from '../NavItem';
 import sideNavStyles from './style';
+import StyledBadge from 'components/StyledBadge';
 
-function SideNav({ open, handleSideNav }) {
+function SideNav({ open, user, handleSideNav }) {
   const { pathname } = useLocation();
+  const history = useHistory();
+
   const [openSub, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -48,12 +51,37 @@ function SideNav({ open, handleSideNav }) {
           <Typography className={classes.appTitle}>Custom MUI</Typography>
         </Box>
       </Toolbar>
+      <div className={classes.userContainer}>
+        <StyledBadge
+          overlap="circle"
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          variant="dot"
+        >
+          <Avatar src={userImg} className={classes.avatar} />
+        </StyledBadge>
+        <Box display="flex" flexDirection="column" pl={2}>
+          <Typography style={{ fontSize: 14 }}>Hi, Vamshi Maddur</Typography>
+          <Box className={classes.userActionsContainer}>
+            <Settings
+              style={{ height: 16, width: 16, cursor: 'pointer' }}
+              onClick={() => {
+                history.push('/settings');
+              }}
+            />
+            <User style={{ height: 16, width: 16 }} />
+            <LogOut style={{ height: 16, width: 16 }} />
+          </Box>
+        </Box>
+      </div>
       <Box className={classes.drawerContainer}>
         <List component="nav" className={classes.list}>
           <NavItem
             label="Home"
             to="/"
-            icon={faHome}
+            icon={<Home style={{ height: 24, width: 24 }} />}
             alt="home"
             active={pathname === '/'}
             background={blue}
@@ -62,7 +90,7 @@ function SideNav({ open, handleSideNav }) {
           <NavItem
             label="About"
             to="/about"
-            icon={faBuilding}
+            icon={<Info style={{ height: 24, width: 24 }} />}
             alt="about"
             active={pathname === '/about'}
             background={red}
@@ -70,10 +98,9 @@ function SideNav({ open, handleSideNav }) {
           />
           <NavItem
             label="Contact"
-            to="/contact"
-            icon={faEdit}
+            icon={<Smartphone style={{ height: 24, width: 24 }} />}
             alt="contact"
-            active={pathname === '/contact'}
+            active={pathname.split('/').includes('contact')}
             background={green}
             open={open}
             hasSubMenu={true}
@@ -81,42 +108,39 @@ function SideNav({ open, handleSideNav }) {
             onClick={handleClick}
             handleSideNav={handleSideNav}
           />
-          <Collapse in={openSub} timeout="auto" unmountOnExit>
-            <List component="nav">
+          <Collapse in={openSub} timeout="auto" unmountOnExit classes={{ wrapper: classes.collapseWrapper }}>
+            <List component="nav" style={{ paddingTop: 0, paddingBottom: 0 }}>
               <NavItem
-                label="email"
+                label="Email"
                 to="/contact/email"
-                icon={faPaperPlane}
+                icon={<Mail style={{ height: 18, width: 18 }} />}
                 alt="email"
                 active={pathname === '/contact/email'}
                 background={green}
                 handleSideNav={handleSideNav}
+                subMenu={true}
               />
               <NavItem
-                label="Call"
-                to="/contact/call"
-                icon={faPhoneAlt}
-                alt="call"
-                active={pathname === '/contact/call'}
+                label="Phone"
+                to="/contact/phone"
+                icon={<PhoneCall style={{ height: 18, width: 18 }} />}
+                alt="phone"
+                active={pathname === '/contact/phone'}
                 background={green}
                 handleSideNav={handleSideNav}
+                subMenu={true}
               />
             </List>
           </Collapse>
-          <NavItem
-            label="Settings"
-            to="/settings"
-            icon={faCog}
-            alt="settings"
-            active={pathname === '/settings'}
-            background={purple}
-            handleSideNav={handleSideNav}
-          />
         </List>
       </Box>
       <div className={classes.action}>
         <IconButton color="primary" aria-label="open side nav" onClick={handleSideNav}>
-          <FontAwesomeIcon icon={open ? faChevronLeft : faChevronRight} className={classes.expandIcon} />
+          {open ? (
+            <ChevronsLeft style={{ height: 20, width: 20 }} />
+          ) : (
+            <ChevronsRight style={{ height: 20, width: 20 }} />
+          )}
         </IconButton>
       </div>
     </Drawer>

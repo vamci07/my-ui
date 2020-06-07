@@ -1,9 +1,12 @@
 import React from 'react';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { findKey } from 'lodash';
+import { useLocation } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
-  Typography,
+  Breadcrumbs,
   makeStyles,
   useScrollTrigger,
   IconButton,
@@ -11,16 +14,24 @@ import {
   Badge,
   Menu,
   MenuItem,
-  Avatar,
   Button,
   ListItemIcon,
   ListItemText,
+  Link,
+  Typography,
+  capitalize,
 } from '@material-ui/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import userImg from 'static/images/user.jpg';
-import StyledBadge from './StyledBadge';
+import { ChevronDown } from '@styled-icons/feather/ChevronDown';
+import { Bell } from '@styled-icons/feather/Bell';
+import { ToggleLeft } from '@styled-icons/feather/ToggleLeft';
+import { ToggleRight } from '@styled-icons/feather/ToggleRight';
+import { Home } from '@styled-icons/feather/Home';
+import { Circle } from '@styled-icons/feather/Circle';
+import { grey } from '@material-ui/core/colors';
+import { links } from 'utils/routes';
 import { ukFlag, grFlag, frFlag } from './icons';
+
+const drawerWidth = 272;
 
 const headerStyles = makeStyles((theme) => ({
   grow: {
@@ -28,13 +39,30 @@ const headerStyles = makeStyles((theme) => ({
   },
   appBar: {
     height: 72,
+    margin: theme.spacing(2),
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.primary.main,
     boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    paddingLeft: 72,
+    width: `calc(100% - ${104}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    borderRadius: theme.spacing(2),
+  },
+  appBarShift: {
+    paddingLeft: 0,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    margin: theme.spacing(2),
   },
   toolbar: {
     height: 72,
+    display: 'flex',
+    alignItems: 'center',
   },
   sectionDesktop: {
     display: 'flex',
@@ -42,25 +70,34 @@ const headerStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(2),
     },
   },
-  titleContainer: {},
-  subTitle: {
-    fontSize: theme.typography.pxToRem(12),
-  },
-  title: {
-    fontSize: theme.typography.pxToRem(18),
-    lineHeight: theme.typography.pxToRem(20),
-    fontWeight: theme.typography.fontWeightBold,
-  },
-  avatar: (props) => ({
+  toggleContainer: {
+    marginRight: 8,
     cursor: 'pointer',
+    color: theme.palette.text.secondary,
+    '&:hover': {
+      color: theme.palette.text.primary,
+    },
+  },
+  breadcrumbsContainer: {
+    padding: theme.spacing(1, 3),
     marginLeft: theme.spacing(1),
-    border: props.isMenuOpen && `4px solid ${theme.palette.divider}`,
-  }),
-  menuPaper: {
-    marginTop: 22,
+    backgroundColor: theme.palette.type === 'light' ? grey[100] : grey[800],
+    borderRadius: theme.spacing(2),
+    color: theme.palette.text.secondary,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  linkText: {
+    fontSize: theme.typography.pxToRem(14),
+    '&:hover': {
+      color: theme.palette.primary.main,
+    },
   },
   lngMenu: {
-    marginTop: 14,
+    marginTop: 12,
+  },
+  lngMenuPaper: {
+    minWidth: 132,
   },
   badge: {
     fontSize: theme.typography.pxToRem(10),
@@ -94,24 +131,18 @@ ElevationScroll.propTypes = {
 };
 
 const lngOptions = [
-  { label: 'EN', value: 'en', icon: ukFlag },
-  { label: 'DE', value: 'de', icon: grFlag },
-  { label: 'FR', value: 'fr', icon: frFlag },
+  { label: 'English', value: 'en', icon: ukFlag },
+  { label: 'German', value: 'de', icon: grFlag },
+  { label: 'French', value: 'fr', icon: frFlag },
 ];
 
-function Header({ lng, changeLanguage }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [lngAnchorEl, setLngAnchorEl] = React.useState(null);
+function Header({ open, lng, changeLanguage, handleSideNav }) {
+  const { pathname } = useLocation();
 
-  const isMenuOpen = Boolean(anchorEl);
+  const [lngAnchorEl, setLngAnchorEl] = React.useState(null);
   const isLngMenuOpen = Boolean(lngAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleMenuClose = () => {
-    setAnchorEl(null);
     setLngAnchorEl(null);
   };
 
@@ -119,26 +150,8 @@ function Header({ lng, changeLanguage }) {
     setLngAnchorEl(event.currentTarget);
   };
 
-  const classes = headerStyles({ isMenuOpen });
-  const menuId = 'account-menu';
+  const classes = headerStyles();
   const lngMenuId = 'lng-menu';
-
-  const renderMenu = (
-    <Menu
-      getContentAnchorEl={null}
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      className={classes.menuPaper}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
 
   const filteredLngs = lngOptions.filter((lngItem) => lngItem.value !== lng);
   const renderLngMenu = (
@@ -152,6 +165,7 @@ function Header({ lng, changeLanguage }) {
       open={isLngMenuOpen}
       onClose={handleMenuClose}
       className={classes.lngMenu}
+      classes={{ paper: classes.lngMenuPaper }}
     >
       {filteredLngs &&
         filteredLngs.length &&
@@ -166,7 +180,7 @@ function Header({ lng, changeLanguage }) {
               }}
             >
               <ListItemIcon className={classes.listItemIcon}>
-                <img src={icon} alt={value} style={{ height: 24, width: 24 }} />
+                <img src={icon} alt={value} style={{ height: 20, width: 20 }} />
               </ListItemIcon>
               <ListItemText primary={label} classes={{ primary: classes.listItemText }} />
             </MenuItem>
@@ -174,21 +188,43 @@ function Header({ lng, changeLanguage }) {
         })}
     </Menu>
   );
-
   const selectedLngOption = lngOptions.filter((lngItem) => lngItem.value === lng);
-
   return (
     <ElevationScroll>
       <Box className={classes.grow}>
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
           <Toolbar className={classes.toolbar}>
-            <div className={classes.titleContainer}>
-              <Typography variant="subtitle1" className={classes.subTitle} noWrap>
-                Domain
-              </Typography>
-              <Typography variant="h6" className={classes.title} noWrap>
-                Project Name
-              </Typography>
+            <div className={classes.toggleContainer} onClick={() => handleSideNav()}>
+              {open ? (
+                <ToggleRight style={{ width: 28, height: 24 }} />
+              ) : (
+                <ToggleLeft style={{ width: 28, height: 24 }} />
+              )}
+            </div>
+            <div className={classes.breadcrumbsContainer}>
+              <Breadcrumbs
+                aria-label="location-breadcrumb"
+                separator={<Circle style={{ height: 6, width: 6 }} />}
+                style={{ lineHeight: '14px' }}
+              >
+                <Link color="inherit" href="/" className={classes.linkText}>
+                  <Home style={{ width: 14, height: 14 }} />
+                </Link>
+                {pathname !== '/' && (
+                  <Typography color="inherit" className={classes.linkText}>
+                    {capitalize(
+                      findKey(links, function (o) {
+                        return o === pathname;
+                      })
+                    )}
+                  </Typography>
+                )}
+              </Breadcrumbs>
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
@@ -198,44 +234,35 @@ function Header({ lng, changeLanguage }) {
                 startIcon={
                   <img
                     src={selectedLngOption[0].icon}
-                    style={{ height: 24, width: 24 }}
+                    style={{ height: 20, width: 20 }}
                     alt={selectedLngOption[0].value}
                   />
                 }
-                endIcon={<FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 12 }} />}
+                endIcon={<ChevronDown style={{ height: 16, width: 16 }} />}
                 aria-label="language options"
                 aria-controls={lngMenuId}
                 arai-haspopup="true"
                 onClick={handleLngMenu}
+                style={{ textTransform: 'unset' }}
               >
                 {selectedLngOption[0].label}
               </Button>
               <IconButton aria-label="show 4 new notifications" color="default">
-                <Badge badgeContent={4} color="secondary" classes={{ badge: classes.badge }}>
-                  <FontAwesomeIcon icon={faBell} />
+                <Badge
+                  overlap="circle"
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  variant="dot"
+                  color="secondary"
+                >
+                  <Bell style={{ height: 28, width: 28 }} />
                 </Badge>
               </IconButton>
-              <StyledBadge
-                overlap="circle"
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                variant="dot"
-              >
-                <Avatar
-                  src={userImg}
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  className={classes.avatar}
-                />
-              </StyledBadge>
             </div>
           </Toolbar>
         </AppBar>
-        {renderMenu}
         {renderLngMenu}
       </Box>
     </ElevationScroll>

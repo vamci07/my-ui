@@ -11,8 +11,18 @@ const navItemStyles = makeStyles((theme) => ({
   listItem: (props) => ({
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
-    backgroundColor: props.active ? blueGrey[900] : theme.palette.common.black,
-    borderLeft: props.active ? `4px solid ${props.background[800]}` : `4px solid ${theme.palette.common.black}`,
+    backgroundColor: props.subMenu || props.expanded || props.active ? theme.palette.common.black : blueGrey[900],
+    borderLeft: props.active
+      ? `4px solid ${props.background[800]}`
+      : props.subMenu || props.expanded
+      ? `4px solid ${theme.palette.common.black}`
+      : `4px solid ${blueGrey[900]}`,
+    '&:hover': {
+      backgroundColor: props.active || props.expanded || props.subMenu ? theme.palette.common.black : blueGrey[900],
+    },
+  }),
+  listItemText: (props) => ({
+    fontSize: props.subMenu ? theme.typography.pxToRem(12) : theme.typography.pxToRem(14),
   }),
   listItemIcon: (props) => ({
     minWidth: props.hasSubMenu && !props.open ? 32 : 56,
@@ -30,25 +40,17 @@ const navItemStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavItem({
-  label,
-  to,
-  icon,
-  alt,
-  active,
-  background,
-  open,
-  hasSubMenu,
-  expanded,
-  onClick,
-  handleSideNav,
-}) {
-  const classes = navItemStyles({ active, background, hasSubMenu, open });
+export default function NavItem({ label, to, icon, active, background, open, hasSubMenu, expanded, onClick, subMenu }) {
+  const classes = navItemStyles({ active, background, hasSubMenu, open, subMenu, expanded });
   return (
-    <ListItem button component={Link} to={to} onClick={onClick} className={classes.listItem}>
-      <ListItemIcon className={classes.listItemIcon}>
-        <FontAwesomeIcon icon={icon} className={classes.navIcon} />
-      </ListItemIcon>
+    <ListItem
+      button
+      component={to ? Link : 'div'}
+      to={to ? to : undefined}
+      onClick={onClick}
+      className={classes.listItem}
+    >
+      <ListItemIcon className={classes.listItemIcon}>{icon}</ListItemIcon>
       {hasSubMenu &&
         !open &&
         (expanded ? (
@@ -56,7 +58,12 @@ export default function NavItem({
         ) : (
           <FontAwesomeIcon icon={faChevronDown} className={classes.subMenuIcon} />
         ))}
-      <ListItemText primary={<Trans i18nKey={label.toLowerCase()}>{label}</Trans>} />
+      {label && (
+        <ListItemText
+          classes={{ primary: classes.listItemText }}
+          primary={<Trans i18nKey={label.toLowerCase()}>{label}</Trans>}
+        />
+      )}
       {hasSubMenu &&
         open &&
         (expanded ? (
@@ -70,7 +77,7 @@ export default function NavItem({
 
 NavItem.propTypes = {
   label: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
   icon: PropTypes.object.isRequired,
   alt: PropTypes.string.isRequired,
   active: PropTypes.bool,
@@ -80,9 +87,11 @@ NavItem.propTypes = {
   expanded: PropTypes.bool,
   onClick: PropTypes.func,
   handleSideNav: PropTypes.func,
+  subMenu: PropTypes.bool,
 };
 
 NavItem.defaultProps = {
+  to: undefined,
   active: false,
   background: blue,
   open: false,
@@ -90,4 +99,5 @@ NavItem.defaultProps = {
   expanded: false,
   onClick: () => {},
   handleSideNav: () => {},
+  subMenu: false,
 };

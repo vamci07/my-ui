@@ -5,7 +5,7 @@ export default function About() {
   return (
     <Box>
       <Typography paragraph>You are interested to know more!</Typography>
-      <Typography paragraph>
+      <Typography paragraph align="justify">
         Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim
         diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
         tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis

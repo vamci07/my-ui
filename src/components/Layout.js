@@ -6,20 +6,12 @@ import Content from './Content';
 
 const layoutStyles = makeStyles({
   root: {
-    width: '100%',
-    display: 'flex',
-  },
-  sideNavSection: {
-    width: 72,
-  },
-  mainSection: {
-    width: 'calc(100vw - 72px)',
     display: 'flex',
   },
 });
 
 function Layout({ lng, changeLanguage, children }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleSideNav = () => {
     setOpen(!open);
@@ -29,13 +21,11 @@ function Layout({ lng, changeLanguage, children }) {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.sideNavSection}>
-        <SideNav open={open} handleSideNav={handleSideNav} />
-      </Box>
-      <Box className={classes.mainSection}>
-        <Header open={open} lng={lng} changeLanguage={changeLanguage} />
-        <Content children={children} />
-      </Box>
+      <SideNav open={open} handleSideNav={handleSideNav} />
+      <div>
+        <Header open={open} lng={lng} changeLanguage={changeLanguage} handleSideNav={handleSideNav} />
+        <Content open={open} children={children} />
+      </div>
     </Box>
   );
 }

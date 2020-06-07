@@ -1,22 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@material-ui/core';
-import { useTranslation, Trans } from 'react-i18next';
-import landingStyles from './style';
 
-function Landing() {
-  const { t } = useTranslation();
-  const classes = landingStyles();
+export default function Phone() {
   return (
-    <Box className={classes.root}>
-      <Typography paragraph>{t('title')}</Typography>
-      <Typography paragraph component="div">
-        <div>
-          <Trans i18nKey="description.part1">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </Trans>
-        </div>
-        <div>{t('description.part2')}</div>
-      </Typography>
+    <Box>
+      <Typography paragraph>Please contact me via phone!!</Typography>
       <Typography paragraph align="justify">
         Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim
         diam. Pulvinar elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
@@ -30,5 +18,3 @@ function Landing() {
     </Box>
   );
 }
-
-export default Landing;

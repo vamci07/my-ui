@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, ListItemIcon, ListItemText, makeStyles } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText, makeStyles, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { blue, blueGrey } from '@material-ui/core/colors';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { ChevronDown } from '@styled-icons/feather/ChevronDown';
+import { ChevronUp } from '@styled-icons/feather/ChevronUp';
 import { Trans } from 'react-i18next';
 
 const navItemStyles = makeStyles((theme) => ({
@@ -28,15 +28,12 @@ const navItemStyles = makeStyles((theme) => ({
     minWidth: props.hasSubMenu && !props.open ? 32 : 56,
     color: props.active ? props.background[500] : theme.palette.common.white,
   }),
-  navIcon: {
-    width: 24,
-    height: 24,
-    marginLeft: 4,
-    fontSize: theme.typography.pxToRem(20),
+  subMenuWrapper: {
+    marginRight: theme.spacing(2),
   },
   subMenuIcon: {
-    fontSize: 10,
-    marginRight: theme.spacing(2),
+    height: 14,
+    width: 14,
   },
 }));
 
@@ -54,9 +51,13 @@ export default function NavItem({ label, to, icon, active, background, open, has
       {hasSubMenu &&
         !open &&
         (expanded ? (
-          <FontAwesomeIcon icon={faChevronUp} className={classes.subMenuIcon} />
+          <Box className={classes.subMenuWrapper}>
+            <ChevronUp className={classes.subMenuIcon} />
+          </Box>
         ) : (
-          <FontAwesomeIcon icon={faChevronDown} className={classes.subMenuIcon} />
+          <Box className={classes.subMenuWrapper}>
+            <ChevronDown className={classes.subMenuIcon} />
+          </Box>
         ))}
       {label && (
         <ListItemText
@@ -67,9 +68,13 @@ export default function NavItem({ label, to, icon, active, background, open, has
       {hasSubMenu &&
         open &&
         (expanded ? (
-          <FontAwesomeIcon icon={faChevronUp} className={classes.subMenuIcon} />
+          <Box className={classes.subMenuWrapper}>
+            <ChevronUp className={classes.subMenuIcon} />
+          </Box>
         ) : (
-          <FontAwesomeIcon icon={faChevronDown} className={classes.subMenuIcon} />
+          <Box className={classes.subMenuWrapper}>
+            <ChevronDown className={classes.subMenuIcon} />
+          </Box>
         ))}
     </ListItem>
   );

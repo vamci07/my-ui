@@ -3,6 +3,8 @@ import { useMediaQuery } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { routes } from 'utils/routes';
 import { ThemeWrapper, myTheme } from './theme';
 import Layout from './components/Layout';
@@ -69,6 +71,18 @@ function App() {
         <Layout lng={lng} changeLanguage={changeLanguage}>
           {routes}
         </Layout>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          closeButton={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </>
     </ThemeWrapper>
   );

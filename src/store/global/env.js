@@ -1,3 +1,5 @@
+import toast from 'components/Toast';
+
 const prefix = 'GLOBAL/ENV/';
 export const SET_CURRENT_OS = `${prefix}SET_CURRENT_OS`;
 export const SET_CURRENT_BROWSER = `${prefix}SET_CURRENT_BROWSER`;
@@ -24,6 +26,12 @@ export function setCurrentOs(currentOs = undefined) {
       type: SET_CURRENT_OS,
       currentOs,
     });
+    toast.success({
+      header: 'Success',
+      message: `Current operating system - ${currentOs}`,
+      config: { autoClose: true },
+    });
+    return;
   };
 }
 
@@ -33,5 +41,7 @@ export function setCurrentBrowser(currentBrowser = undefined) {
       type: SET_CURRENT_BROWSER,
       currentBrowser,
     });
+    toast.success({ header: 'Success', message: `Current browser - ${currentBrowser}`, config: { autoClose: true } });
+    return;
   };
 }

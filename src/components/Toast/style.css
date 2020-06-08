@@ -1,0 +1,25 @@
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Lato';
+  padding: 0px;
+}
+
+.toast-progress-bar-success {
+  background: rgb(46, 125, 50);
+}
+
+.toast-progress-bar-error {
+  background: rgb(198, 40, 40);
+}
+
+.toast-progress-bar-warning {
+  background: rgb(239, 108, 0);
+}
+
+.toast-progress-bar-info {
+  background: rgb(21, 101, 192);
+}
+
+.toast-progress-bar-default {
+  background: rgba(0, 0, 0, 0.54);
+}

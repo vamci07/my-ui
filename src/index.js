@@ -10,17 +10,15 @@ import { store, persistor } from 'store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <Suspense fallback={null}>
-            <App />
-          </Suspense>
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <Suspense fallback={null}>
+          <App />
+        </Suspense>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 );
 

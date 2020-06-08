@@ -28,7 +28,7 @@ const layoutStyles = makeStyles((theme) => ({
 }));
 
 function Layout({ lng, changeLanguage, children }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   const handleSideNav = () => {
     setOpen(!open);

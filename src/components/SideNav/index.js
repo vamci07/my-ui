@@ -3,7 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { useLocation, useHistory } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
-import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar, Chip } from '@material-ui/core';
+import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar, Chip, Tooltip } from '@material-ui/core';
 import { blue, red, green } from '@material-ui/core/colors';
 import { Home } from '@styled-icons/feather/Home';
 import { Info } from '@styled-icons/feather/Info';
@@ -50,7 +50,7 @@ function SideNav({ open, user, handleSideNav }) {
       <Toolbar className={classes.drawerToolbar}>
         <Box display="flex" alignItems="center">
           <img src={logo} style={{ height: 40, width: 56 }} alt="app-logo" />
-          <Typography className={classes.appTitle}>Custom MUI</Typography>
+          <Typography className={classes.appTitle}>Project Name</Typography>
         </Box>
       </Toolbar>
       <div className={classes.userContainer}>
@@ -64,15 +64,21 @@ function SideNav({ open, user, handleSideNav }) {
         >
           <Avatar src={userImg} className={classes.avatar} />
         </StyledBadge>
-        <Box display="flex" flexDirection="column" pl={2}>
-          <Typography style={{ fontSize: 14 }}>Hi, Vamshi Maddur</Typography>
+        <Box width={168} display="flex" flexDirection="column" pl={2}>
+          <Tooltip title="Vamshi Krishna Reddy Maddur" arrow placement="top-start">
+            <Typography style={{ fontSize: 14 }} noWrap>
+              Hi, Vamshi Krishna Reddy Maddur
+            </Typography>
+          </Tooltip>
           <Box className={classes.userActionsContainer}>
-            <Settings
-              style={{ height: 16, width: 16, cursor: 'pointer' }}
-              onClick={() => {
-                history.push('/settings');
-              }}
-            />
+            <Tooltip title="Settings" arrow placement="bottom">
+              <Settings
+                style={{ height: 16, width: 16, cursor: 'pointer' }}
+                onClick={() => {
+                  history.push('/settings');
+                }}
+              />
+            </Tooltip>
             <User style={{ height: 16, width: 16 }} />
             <LogOut style={{ height: 16, width: 16 }} />
           </Box>

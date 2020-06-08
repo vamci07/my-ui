@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ListItem, ListItemIcon, ListItemText, makeStyles, Box } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText, makeStyles, Box, Tooltip } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { blue, blueGrey } from '@material-ui/core/colors';
 import { ChevronDown } from '@styled-icons/feather/ChevronDown';
@@ -25,7 +25,8 @@ const navItemStyles = makeStyles((theme) => ({
     fontSize: props.subMenu ? theme.typography.pxToRem(12) : theme.typography.pxToRem(14),
   }),
   listItemIcon: (props) => ({
-    minWidth: props.hasSubMenu && !props.open ? 32 : 56,
+    minWidth: 24,
+    marginRight: props.hasSubMenu && !props.open ? 0 : 32,
     color: props.active ? props.background[500] : theme.palette.common.white,
   }),
   subMenuWrapper: {
@@ -47,7 +48,9 @@ export default function NavItem({ label, to, icon, active, background, open, has
       onClick={onClick}
       className={classes.listItem}
     >
-      <ListItemIcon className={classes.listItemIcon}>{icon}</ListItemIcon>
+      <Tooltip title={label} placement="right">
+        <ListItemIcon className={classes.listItemIcon}>{icon}</ListItemIcon>
+      </Tooltip>
       {hasSubMenu &&
         !open &&
         (expanded ? (

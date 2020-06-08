@@ -1,8 +1,14 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import { Box, Typography } from '@material-ui/core';
 import { useTranslation, Trans } from 'react-i18next';
 import landingStyles from './style';
-import Gamer from './components/Gamer';
+import Loading from 'components/Loading';
+
+const Gamer = Loadable({
+  loader: () => import('./components/Gamer'),
+  loading: Loading,
+});
 
 function Landing() {
   const { t } = useTranslation();

@@ -7,7 +7,7 @@ const contentStyles = makeStyles((theme) => ({
   content: {
     width: '100%',
     padding: theme.spacing(3),
-    paddingBottom: theme.spacing(8),
+    paddingBottom: theme.spacing(10),
   },
   toolbar: {
     height: 104,

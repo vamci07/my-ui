@@ -29,8 +29,16 @@ export function setCurrentOs(currentOs = undefined) {
     });
     await axios
       .get('/users')
-      .then((res) => {})
-      .catch((error) => {});
+      .then(({ status, data }) => {
+        console.log('status => ', status, ', data => ', data);
+      })
+      .catch((error) => {
+        const {
+          response: { status, data },
+        } = error;
+        toast.error({ header: 'Error', message: data });
+        return { error: true, status: status };
+      });
     toast.success({
       header: 'Success',
       message: `Current operating system - ${currentOs}`,

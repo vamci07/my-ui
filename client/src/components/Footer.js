@@ -11,8 +11,8 @@ const footerStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    height: 32,
-    margin: theme.spacing(2),
+    height: 64,
+    margin: theme.spacing(2, 2, 0.5),
     bottom: 0,
     top: 'unset',
     backgroundColor: theme.palette.background.paper,
@@ -35,8 +35,8 @@ const footerStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
   toolbar: {
-    height: 32,
-    minHeight: 32,
+    height: 64,
+    minHeight: 64,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

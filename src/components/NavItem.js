@@ -12,11 +12,14 @@ const navItemStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1.5),
     backgroundColor: props.subMenu || props.expanded || props.active ? theme.palette.common.black : blueGrey[900],
-    borderLeft: props.active
-      ? `4px solid ${props.background[800]}`
-      : props.subMenu || props.expanded
-      ? `4px solid ${theme.palette.common.black}`
-      : `4px solid ${blueGrey[900]}`,
+    borderLeft:
+      props.active && !props.hasSubMenu
+        ? `4px solid ${props.background[800]}`
+        : props.active && props.hasSubMenu
+        ? `4px solid ${theme.palette.common.black}`
+        : props.subMenu || props.expanded
+        ? `4px solid ${theme.palette.common.black}`
+        : `4px solid ${blueGrey[900]}`,
     '&:hover': {
       backgroundColor: props.active || props.expanded || props.subMenu ? theme.palette.common.black : blueGrey[900],
     },

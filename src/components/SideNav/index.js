@@ -3,7 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { useLocation, useHistory } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
-import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar } from '@material-ui/core';
+import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar, Chip } from '@material-ui/core';
 import { blue, red, green } from '@material-ui/core/colors';
 import { Home } from '@styled-icons/feather/Home';
 import { Info } from '@styled-icons/feather/Info';
@@ -15,7 +15,7 @@ import { User } from '@styled-icons/feather/User';
 import { LogOut } from '@styled-icons/feather/LogOut';
 // import { ChevronsLeft } from '@styled-icons/feather/ChevronsLeft';
 // import { ChevronsRight } from '@styled-icons/feather/ChevronsRight';
-import logo from 'static/icons/logo.svg';
+import logo from 'static/images/adp_logo_wine.png';
 import userImg from 'static/images/user.jpg';
 import NavItem from '../NavItem';
 import sideNavStyles from './style';
@@ -49,7 +49,7 @@ function SideNav({ open, user, handleSideNav }) {
     >
       <Toolbar className={classes.drawerToolbar}>
         <Box display="flex" alignItems="center">
-          <img src={logo} style={{ height: 40, width: 40 }} alt="app-logo" />
+          <img src={logo} style={{ height: 40, width: 56 }} alt="app-logo" />
           <Typography className={classes.appTitle}>Custom MUI</Typography>
         </Box>
       </Toolbar>
@@ -77,6 +77,9 @@ function SideNav({ open, user, handleSideNav }) {
             <LogOut style={{ height: 16, width: 16 }} />
           </Box>
         </Box>
+      </div>
+      <div className={classes.versionWrapper}>
+        <Chip variant="outlined" color="secondary" label={!open ? '1.0' : 'Version 1.0'} />
       </div>
       <Box className={classes.drawerContainer}>
         <List component="nav" className={classes.list}>

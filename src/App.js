@@ -2,11 +2,14 @@ import React, { useEffect } from 'react';
 import { useMediaQuery } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
 import { routes } from 'utils/routes';
 import { ThemeWrapper, myTheme } from './theme';
 import Layout from './components/Layout';
+import { setCurrentOs, setCurrentBrowser } from 'store/global/env';
 
 function App() {
+  const dispatch = useDispatch();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = React.useMemo(() => myTheme(prefersDarkMode ? 'dark' : 'light'), [prefersDarkMode]);
 
@@ -15,6 +18,35 @@ function App() {
 
   useEffect(() => {
     i18n.changeLanguage('en');
+
+    const userAgent = window.navigator.userAgent,
+      platform = window.navigator.platform,
+      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+      os = null;
+
+    async function getOsName() {
+      let osName = undefined;
+      if (windowsPlatforms.indexOf(platform) !== -1) osName = 'Windows';
+      else if (macosPlatforms.indexOf(platform) !== -1) osName = 'MacOS';
+      else if (iosPlatforms.indexOf(platform) !== -1) osName = 'iOS';
+      else if (/Android/.test(userAgent)) osName = 'Android';
+      else if (!os && /Linux/.test(platform)) osName = 'Linux';
+      await dispatch(setCurrentOs(osName));
+    }
+
+    getOsName();
+
+    async function getBrowserName() {
+      let browser = undefined;
+      if (document.documentMode) browser = 'IE';
+      if (!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)) browser = 'Chrome';
+      await dispatch(setCurrentBrowser(browser));
+    }
+
+    getBrowserName();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

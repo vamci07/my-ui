@@ -36,12 +36,16 @@ const sideNavStyles = makeStyles((theme) => ({
   drawerToolbar: {
     height: 72,
     alignItems: 'flex-start',
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 1),
+  },
+  logo: {
+    height: 48,
+    width: 48,
   },
   appTitle: {
     fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightBold,
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(1),
   },
   userContainer: {
     padding: theme.spacing(3, 2),
@@ -55,7 +59,7 @@ const sideNavStyles = makeStyles((theme) => ({
     },
   },
   drawerContainer: {
-    height: 'calc(100vh - 169px)',
+    height: 'calc(100vh - 105px)',
     padding: theme.spacing(2, 0),
     backgroundColor: blueGrey[900],
   },
@@ -65,22 +69,12 @@ const sideNavStyles = makeStyles((theme) => ({
   collapseWrapper: {
     backgroundColor: theme.palette.common.black,
   },
-  //   action: (props) => ({
-  //     position: 'fixed',
-  //     bottom: 0,
-  //     width: props.open ? 240 : 72,
-  //     height: 64,
-  //     display: 'flex',
-  //     alignItems: 'center',
-  //     paddingRight: props.open && theme.spacing(2),
-  //     justifyContent: props.open ? 'flex-end' : 'center',
-  //     transition: 'width 175ms cubic-bezier(0.4, 0, 0.6, 1) 0ms',
-  //     backgroundColor: blueGrey[900],
-  //   }),
-  //   expandIcon: {
-  //     height: 24,
-  //     width: '24px !important',
-  //   },
+  versionWrapper: {
+    height: 64,
+    margin: theme.spacing(3, 2, 1),
+    display: 'flex',
+    alignItems: 'center',
+  },
 }));
 
 export default sideNavStyles;

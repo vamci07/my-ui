@@ -7,6 +7,9 @@ const landingStyles = makeStyles((theme) => ({
   gamerWrapper: {
     padding: theme.spacing(3, 0),
   },
+  paragraph: {
+    fontSize: theme.typography.pxToRem(14),
+  },
 }));
 
 export default landingStyles;

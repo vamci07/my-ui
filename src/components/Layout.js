@@ -4,6 +4,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import Header from './Header';
 import SideNav from './SideNav';
 import Content from './Content';
+import Footer from './Footer';
 
 const drawerWidth = 240;
 
@@ -12,7 +13,7 @@ const layoutStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   section: {
-    width: `calc(100% - ${104}px)`,
+    width: `calc(100% - ${72}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -46,6 +47,7 @@ function Layout({ lng, changeLanguage, children }) {
       >
         <Header open={open} lng={lng} changeLanguage={changeLanguage} handleSideNav={handleSideNav} />
         <Content open={open} children={children} />
+        <Footer open={open} lng={lng} changeLanguage={changeLanguage} handleSideNav={handleSideNav} />
       </div>
     </Box>
   );

@@ -20,7 +20,7 @@
     "prop-types": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-helmet": "^6.0.0",
+    "react-helmet": "^6.1.0",
     "react-i18next": "^11.5.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "latest",

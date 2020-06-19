@@ -1,9 +1,26 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, Button } from '@material-ui/core';
+import './style.css';
 
 export default function About() {
   return (
-    <Box>
+    <Box width="100%">
+      <div style={{ width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+        <Button
+          endIcon={
+            <svg viewBox="0 0 20 20" className="icon">
+              <path d="M0 0 L10 10 L0 20" className="path" />
+            </svg>
+          }
+        >
+          Check svg
+        </Button>
+        <div class="inner">
+          <span>i</span>
+          <h1>Hey</h1>
+          <p>This is an informative card that will tell you something that's... well, important!</p>
+        </div>
+      </div>
       <Typography paragraph>You are interested to know more!</Typography>
       <Typography paragraph align="justify">
         Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim

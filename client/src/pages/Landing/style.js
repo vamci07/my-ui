@@ -1,4 +1,11 @@
 import { makeStyles } from '@material-ui/core';
+import styled from 'styled-components';
+
+const StyledButton = styled.div.attrs((props) => ({}))`
+  background-color: ${(props) => props.theme.palette.primary.main};
+  padding: 24px;
+  min-width: 240px;
+`;
 
 const landingStyles = makeStyles((theme) => ({
   root: {
@@ -12,4 +19,4 @@ const landingStyles = makeStyles((theme) => ({
   },
 }));
 
-export default landingStyles;
+export { landingStyles, StyledButton };

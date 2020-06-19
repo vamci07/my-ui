@@ -2,7 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import { Box, Typography } from '@material-ui/core';
 import { useTranslation, Trans } from 'react-i18next';
-import landingStyles from './style';
+import { landingStyles, StyledButton } from './style';
 import Loading from 'components/Loading';
 
 const Gamer = Loadable({
@@ -24,6 +24,7 @@ function Landing() {
         </div>
         <div>{t('description.part2')}</div>
       </Typography>
+      <StyledButton />
       <Box height={432}>
         <Gamer />
       </Box>

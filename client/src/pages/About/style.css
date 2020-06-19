@@ -1,0 +1,60 @@
+.inner {
+  background: #09c999;
+  padding: 1em;
+  margin-right: 12px;
+  border-radius: 10px;
+  width: 250px;
+  clip-path: circle(5% at 90% 18%);
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+.inner:hover {
+  clip-path: circle(75%);
+  background: #00b6ff;
+  height: 120px;
+}
+.inner h1 {
+  color: white;
+  margin: 0;
+}
+.inner p {
+  color: white;
+  font-size: 0.8rem;
+}
+.inner span {
+  float: right;
+  color: white;
+  font-weight: bold;
+  transition: color 0.5s;
+  position: relative;
+  margin-right: 4%;
+}
+.inner:hover span {
+  color: rgba(255, 255, 255, 0);
+}
+
+.icon {
+  width: 1rem;
+  order: -1;
+  transition: all 0.2s;
+  /*  opacity: 0;
+  transform: translateX(-25%); */
+  stroke-dasharray: 0, 20;
+  stroke-dashoffset: -14.142;
+}
+
+.path {
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+}
+
+button:hover span span svg {
+  /*  transform: translateX(0);
+  opacity: 1; */
+  stroke-dasharray: 28.284, 20;
+  stroke-dashoffset: 0;
+}

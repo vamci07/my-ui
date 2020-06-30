@@ -1,9 +1,16 @@
 {
   "name": "my-ui",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "repository": "git@github.com:vamci07/my-ui.git",
+  "author": "Vamshi Maddur <vamci07@gmail.com>",
+  "license": "MIT",
   "scripts": {
+    "clean:client": "rimraf ./client/node_modules ./client/package-lock.json ./client/yarn.lock",
+    "clean:server": "rimraf ./server/node_modules ./server/package-lock.json ./server/yarn.lock",
+    "clean": "rimraf node_modules package-lock.json yarn.lock",
+    "clean:all": "concurrently \"npm run clean\" \"npm run clean:server\" \"npm run clean:client\"",
+    "preinstall": "(cd ./client && yarn) & (cd ../server && yarn)",
     "start": "cd ./client && npm start",
     "start:server": "node server",
     "dev": "concurrently \"nodemon server\" \"npm run start\""
@@ -11,5 +18,8 @@
   "dependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
   }
 }

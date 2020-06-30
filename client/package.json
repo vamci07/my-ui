@@ -37,7 +37,7 @@
     "styled-icons": "^10.2.1"
   },
   "scripts": {
-    "clean": "rimraf node_modules package-lock.json",
+    "clean": "rimraf node_modules package-lock.json yarn.lock",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",

@@ -2,6 +2,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useLocation, useHistory } from 'react-router-dom';
+import { TweenMax, Power3 } from 'gsap';
 // eslint-disable-next-line no-unused-vars
 import { Drawer, Box, List, Toolbar, Typography, Collapse, IconButton, Avatar, Chip, Tooltip } from '@material-ui/core';
 import { blue, red, green } from '@material-ui/core/colors';
@@ -26,6 +27,21 @@ function SideNav({ open, user, handleSideNav }) {
   const history = useHistory();
 
   const [openSub, setOpen] = React.useState(false);
+  const logoRef = React.useRef(null);
+
+  React.useEffect(() => {
+    /* TweenMax.from(logoRef.current, 0.8, {
+      opacity: 0,
+      y: -100,
+      ease: Power3.easeIn,
+    }); */
+    TweenMax.to(logoRef.current, 0.8, {
+      delay: 0.5,
+      opacity: 1,
+      y: 0,
+      ease: Power3.easeOut,
+    });
+  }, []);
 
   const handleClick = () => {
     setOpen(!openSub);
@@ -49,7 +65,7 @@ function SideNav({ open, user, handleSideNav }) {
     >
       <Toolbar className={classes.drawerToolbar}>
         <Box display="flex" alignItems="center">
-          <img src={logo} style={{ height: 40, width: 56 }} alt="app-logo" />
+          <img src={logo} style={{ height: 40, width: 56, opacity: 0 }} alt="app-logo" ref={logoRef} />
           <Typography className={classes.appTitle}>Project Name</Typography>
         </Box>
       </Toolbar>

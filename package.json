@@ -10,7 +10,9 @@
     "clean:server": "rimraf ./server/node_modules ./server/package-lock.json ./server/yarn.lock",
     "clean": "rimraf node_modules package-lock.json yarn.lock",
     "clean:all": "concurrently \"npm run clean\" \"npm run clean:server\" \"npm run clean:client\"",
-    "preinstall": "(cd ./client && yarn) & (cd ../server && yarn)",
+    "preinstall:client": "cd client && yarn",
+    "preinstall:server": "cd server && yarn",
+    "preinstall": "yarn preinstall:client & yarn preinstall:server",
     "start": "cd ./client && npm start",
     "start:server": "node server",
     "dev": "concurrently \"nodemon server\" \"npm run start\""

@@ -6,7 +6,7 @@ addDecorator(themeDecorator);
 
 const styles = {
   padding: 24,
-  margin: 0
+  margin: 0,
 };
 const Center = ({ children }) => <div style={styles}>{children}</div>;
 

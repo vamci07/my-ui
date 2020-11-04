@@ -29,7 +29,9 @@ import { Home } from '@styled-icons/feather/Home';
 import { Circle } from '@styled-icons/feather/Circle';
 import { grey } from '@material-ui/core/colors';
 import { links } from 'utils/routes';
-import { ukFlag, grFlag, frFlag } from './icons';
+import ukFlag from 'static/icons/uk.svg';
+import grFlag from 'static/icons/ger.svg';
+import frFlag from 'static/icons/fra.svg';
 
 const drawerWidth = 272;
 
